@@ -60,10 +60,15 @@ nav {
     color: #6366f1;
 }
 
+.menu-toggle {
+    display: none;
+}
+
 .mobile-menu {
     display: none;
     flex-direction: column;
     cursor: pointer;
+    z-index: 1001;
 }
 
 .mobile-menu span {
@@ -72,6 +77,57 @@ nav {
     background: #e2e8f0;
     margin: 3px 0;
     transition: 0.3s;
+}
+
+/* Mobile menu animation when checked */
+.menu-toggle:checked + .mobile-menu span:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.menu-toggle:checked + .mobile-menu span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle:checked + .mobile-menu span:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+    .mobile-menu {
+        display: flex;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 60px;
+        right: -100%;
+        width: 100%;
+        height: calc(100vh - 60px);
+        background: #1a202c;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding-top: 50px;
+        transition: right 0.3s ease;
+        z-index: 1000;
+    }
+
+    .nav-links.active {
+        right: 0;
+    }
+
+    .menu-toggle:checked ~ .nav-links {
+        right: 0;
+    }
+
+    .nav-links li {
+        margin: 20px 0;
+    }
+
+    .nav-links a {
+        font-size: 18px;
+    }
 }
 
 /* Hero Section */
@@ -644,4 +700,5 @@ footer {
     .section {
         padding: 40px 0;
     }
+
 }
